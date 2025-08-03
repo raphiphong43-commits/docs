@@ -1,5 +1,35 @@
 # Docs changelog
 
+**28 July 2025**
+
+We have restructured the general "[Billing and payments](https://docs.github.com/en/billing)" articles to align with the Copilot and Actions docs. In addition, we've combined a few old "About" articles to directly answer common questions that new users have: [How GitHub billing works](https://docs.github.com/en/billing/get-started/how-billing-works) and [Introduction to billing and licensing](https://docs.github.com/en/billing/get-started/introduction-to-billing).
+
+<hr>
+
+**16 July 2025**
+
+We've added documentation describing how to use the GraphQL API to create a new issue and, in the same request, assign the issue to Copilot coding agent.
+
+See: [Using Copilot to work on an issue](https://docs.github.com/copilot/how-tos/agents/copilot-coding-agent/using-copilot-to-work-on-an-issue#assigning-an-issue-to-copilot-via-the-github-api).
+
+<hr>
+
+**16 July 2025**
+
+We've updated the Copilot documentation to coincide with the release of an improved user interface for configuring the firewall for Copilot coding agent.
+
+See: [Customizing or disabling the firewall for Copilot coding agent](https://docs.github.com/en/copilot/how-tos/agents/copilot-coding-agent/customizing-or-disabling-the-firewall-for-copilot-coding-agent).
+
+<hr>
+
+**16 July 2025**
+
+We've updated the Copilot docs to coincide with the release of issue form support for Copilot Chat. When you use Copilot Chat to create an issue, an issue form will be used if there's an appropriate one in the repo. Previously only issue templates were supported.
+
+See [Using GitHub Copilot to create issues](https://docs.github.com/copilot/how-tos/github-flow/using-github-copilot-to-create-issues).
+
+<hr>
+
 **30 June 2025**
 
 Many enterprise customers want to measure the downstream impact of Copilot on their company, looking beyond leading metrics like adoption and usage.
@@ -51,7 +81,7 @@ See [About Billing for GitHub Models](https://docs.github.com/billing/managing-b
 
 **23 June 2025**
 
-We’ve restructured our documentation around Copilot’s AI models to make it easier for users to understand, choose, and configure models across clients and plans. See [Supported AI models in Copilot](https://docs.github.com/copilot/using-github-copilot/ai-models/supported-ai-models-in-copilot) and [Choosing the right AI model for your task](https://docs.github.com/copilot/using-github-copilot/ai-models/choosing-the-right-ai-model-for-your-task).
+We’ve restructured our documentation around Copilot’s AI models to make it easier for users to understand, choose, and configure models across clients and plans. See [Supported AI models in Copilot](https://docs.github.com/copilot/using-github-copilot/ai-models/supported-ai-models-in-copilot) and [Choosing the right AI model for your task](https://docs.github.com/copilot/reference/ai-models/model-comparison).
 
 <hr>
 

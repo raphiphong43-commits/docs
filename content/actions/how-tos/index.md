@@ -7,14 +7,15 @@ versions:
   ghes: '*'
   ghec: '*'
 children:
-  - /writing-workflows
-  - /managing-workflow-runs-and-deployments
-  - /sharing-automations
-  - /monitoring-and-troubleshooting-workflows
-  - /using-github-hosted-runners
-  - /hosting-your-own-runners
-  - /security-for-github-actions
-  - /use-cases-and-examples
-  - /administering-github-actions
+  - /write-workflows
+  - /reuse-automations
+  - /secure-your-work
+  - /deploy
+  - /create-and-publish-actions
+  - /manage-workflow-runs
+  - /manage-runners
+  - /monitor-workflows
+  - /troubleshoot-workflows
+  - /administer
+  - /get-support
 ---
-
