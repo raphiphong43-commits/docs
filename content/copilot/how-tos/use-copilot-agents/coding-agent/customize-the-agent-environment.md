@@ -1,5 +1,5 @@
 ---
-title: Customizing the development environment for Copilot coding agent
+title: Customizing the development environment for GitHub Copilot coding agent
 shortTitle: Customize the agent environment
 intro: 'Learn how to customize {% data variables.product.prodname_copilot %}''s development environment with additional tools.'
 versions:
@@ -13,10 +13,9 @@ redirect_from:
   - /copilot/how-tos/agents/copilot-coding-agent/customize-the-agent-environment
   - /copilot/how-tos/agents/coding-agent/customize-the-agent-environment
 contentType: how-tos
+category: 
+  - Configure Copilot
 ---
-
-> [!NOTE]
-> {% data reusables.copilot.coding-agent.preview-note-text %}
 
 ## About customizing {% data variables.copilot.copilot_coding_agent %}'s development environment
 
@@ -39,6 +38,9 @@ In its ephemeral development environment, {% data variables.product.prodname_cop
 Instead, you can preconfigure {% data variables.product.prodname_copilot_short %}'s environment before the agent starts by creating a special {% data variables.product.prodname_actions %} workflow file, located at `.github/workflows/copilot-setup-steps.yml` within your repository.
 
 A `copilot-setup-steps.yml` file looks like a normal {% data variables.product.prodname_actions %} workflow file, but must contain a single `copilot-setup-steps` job. This job will be executed in {% data variables.product.prodname_actions %} before {% data variables.product.prodname_copilot_short %} starts working. For more information on {% data variables.product.prodname_actions %} workflow files, see [AUTOTITLE](/actions/using-workflows/workflow-syntax-for-github-actions).
+
+> [!NOTE]
+> The `copilot-setup-steps.yml` workflow won't trigger unless it's present on your default branch.
 
 Here is a simple example of a `copilot-setup-steps.yml` file for a TypeScript project that clones the project, installs Node.js and downloads and caches the project's dependencies. You should customize this to fit your own project's language(s) and dependencies:
 
@@ -88,12 +90,13 @@ In your `copilot-setup-steps.yml` file, you can only customize the following set
 * `steps` (see above)
 * `permissions` (see above)
 * `runs-on` (see below)
-* `container `
 * `services`
 * `snapshot`
 * `timeout-minutes` (maximum value: `59`)
 
 For more information on these options, see [AUTOTITLE](/actions/writing-workflows/workflow-syntax-for-github-actions#jobs).
+
+Any value that is set for the `fetch-depth` option of the `actions/checkout` action will be overridden to allow the agent to rollback commits upon request, while mitigating security risks. For more information, see [`actions/checkout/README.md`](https://github.com/actions/checkout/blob/main/README.md).
 
 Your `copilot-setup-steps.yml` file will automatically be run as a normal {% data variables.product.prodname_actions %} workflow when changes are made, so you can see if it runs successfully. This will show alongside other checks in a pull request where you create or modify the file.
 
@@ -138,6 +141,44 @@ jobs:
 > [!NOTE]
 > * {% data variables.copilot.copilot_coding_agent %} is only compatible with Ubuntu x64 Linux runners. Runners with Windows, macOS or other operating systems are not supported.
 > * Self-hosted {% data variables.product.prodname_actions %} runners are not supported.
+
+## Using self-hosted {% data variables.product.prodname_actions %} runners with ARC
+
+You can use ARC (Actions Runner Controller) to run {% data variables.copilot.copilot_coding_agent %} on self-hosted runners. You must first set up ARC-managed scale sets in your environment. For more information, see [AUTOTITLE](/actions/hosting-your-own-runners/managing-self-hosted-runners-with-actions-runner-controller/about-actions-runner-controller).
+
+> [!WARNING]
+> Persistent runners are not recommended for autoscaling scenarios with {% data variables.copilot.copilot_coding_agent %}.
+
+> [!NOTE]
+> * ARC is the only officially supported solution for self-hosting {% data variables.copilot.copilot_coding_agent %}.
+> * {% data variables.copilot.copilot_coding_agent %} is only compatible with Ubuntu x64 Linux runners. Runners with Windows, macOS or other operating systems are not supported.
+> * For more information about ARC, see [AUTOTITLE](/actions/concepts/runners/actions-runner-controller).
+
+1. In your `copilot-setup-steps.yml` file, set the `runs-on` attribute to your ARC-managed scale set name:
+
+   ```yaml
+   # ...
+
+   jobs:
+     copilot-setup-steps:
+       runs-on: arc-scale-set-name
+       # ...
+   ```
+
+1. Disable {% data variables.copilot.copilot_coding_agent %}'s integrated firewall in your repository settings, as it is not compatible with self-hosted runners. Without disabling the firewall, runners will not be able to connect to {% data variables.product.prodname_copilot_short %}. You must configure your own network security controls before disabling the built-in firewall. For more information, see [AUTOTITLE](/copilot/customizing-copilot/customizing-or-disabling-the-firewall-for-copilot-coding-agent).
+    
+    > [!WARNING]
+    > Disabling the firewall reduces isolation between {% data variables.product.prodname_copilot_short %} and your self-hosted environment. You must implement alternative network security controls to protect your environment.
+
+### Security considerations for self-hosted runners
+
+When using self-hosted runners, especially with the firewall disabled, ensure your hosting environment has strict network communication controls. The following endpoints must be reachable from your runners:
+
+* `api.githubcopilot.com`
+* `uploads.github.com`
+* `user-images.githubusercontent.com`
+
+For a comprehensive list of other hosts that must also be allowlisted for {% data variables.product.prodname_actions %} self-hosted runners, see [AUTOTITLE](/actions/reference/runners/self-hosted-runners#accessible-domains-by-function).
 
 ## Enabling Git Large File Storage (LFS)
 

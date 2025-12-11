@@ -30,29 +30,7 @@ shortTitle: Set up budgets
 contentType: tutorials
 ---
 
-Budgets and alerts allow you to track spending on metered products for your accounts, organizations, cost centers (enterprise only), and repositories. By setting a monthly budget, you can monitor your spending and receive notifications by email when your spending exceeds certain preset percentages of your budget threshold. This can help you stay within your budget and avoid overspending.
-
-If your account does not have a valid payment method on file, usage is blocked once you use up your quota.
-
-By default, if you have a valid payment method on file, spending is limited to $0 USD until you set a budget. You can set and manage a budget to limit spending for a product or SKU.
-
-<!--Billing: default budget-->
-
-## About budgets
-
-Each budget has a type and a scope that define which paid use contributes to spending against the budget.
-
-* **Type**: Defines which metered product or SKU is measured.
-* **Scope**: Defines whether the budget applies to the whole account, or to a subset of repositories, organizations, or cost centers (enterprise only).
-
-### Your first billing cycle after creating a budget
-
-When you first create a budget, be aware that the budget applies only to metered usage from the date of its creation onwards. Any use made before you created the budget, is not included in the calculations. This means that you may exceed your budget in the first billing cycle after you create your budget, even if you select the option stop usage when the limit is reached.
-
-### Budget limitations
-
-For license-based products such as {% data variables.product.prodname_copilot %}, {% data variables.product.prodname_AS %}, {% data variables.product.prodname_team %}, and {% data variables.product.prodname_enterprise %}, setting a budget does not prevent usage over the limit but does provide alerts.
-Budgets and alerts are not available for pre-paid volume licenses.
+Budgets help you track and control spending on different products. To learn more, see [AUTOTITLE](/billing/concepts/budgets-and-alerts).
 
 ## Deciding on the type and scope for a budget
 
@@ -62,19 +40,21 @@ When deciding on the type and scope for a budget, remember that the use of meter
 
 In this example, the organization has set a budget of $50 for the "Actions" product and a budget of $100 for one of the SKUs within the "Actions" product. The organization has used all the included quota of actions minutes and an extra $50 of billed minutes. Some of the extra use was for Linux 96-core runners so it is applied to both budgets. Overall, the organization has used the full budget for the "Actions" product of $50. Members are now blocked from using all {% data variables.product.github %}-hosted runners until the next billing cycle or until the "Actions" product budget is increased. The SKU budget for Linux 96-core runners serves no purpose and is confusing, so should be deleted.
 
-We recommend that you avoid creating overlapping budgets for the use of a product and a SKU, or an organization and a repository, so that users are not unexpectedly blocked from using a feature that they rely on. Alternative, you may prefer to monitor use without blocking users by disabling the "Stop usage when budget limit is reached" option.
+We recommend that you avoid creating overlapping budgets for the use of a product and a SKU, or an organization and a repository, so that users are not unexpectedly blocked from using a feature that they rely on. Alternatively, you may prefer to monitor use without blocking users by disabling the "Stop usage when budget limit is reached" option.
 
 ## Managing budgets for your personal account
 
-You can set budgets and receive alerts when your usage reaches 75%, 90%, or 100% of your defined budget. Budgets can be scoped at the repository or product level, depending on the product.
+You can set budgets and receive alerts when your usage of a product reaches 75%, 90%, or 100% of a defined budget. Budgets can be set for a specific repository or for your whole account.
 
 {% data reusables.user-settings.access_billing_settings_url %}
+
 1. Click **Budgets and alerts**.
 1. To create a new budget, click **New budget**.
-1. Under "Budget Type" select either **Product-level budget** or **SKU-level budget**.
+1. Under "Budget Type" select **Product-level budget**, **SKU-level budget**, or **Bundled premium requests budget**.
 
-   * To create a Product-level budget, choose a metered product from the dropdown.
-   * To create a SKU-level budget, choose a SKU from the dropdown. This limits spending for an individual SKU.
+   * To limit spending at a Product-level, in "Product-level budget" choose a product from the dropdown, for example: {% data variables.product.prodname_codespaces %}.
+   * To limit spending at a SKU-level, in "SKU-level budget" choose a Product and then a SKU, for example: {% data variables.product.prodname_codespaces %} and {% data variables.product.prodname_codespaces %} storage.
+   * To limit spending on premium requests across all features, enable "Bundled premium requests budget" or to limit spending for a specific feature, set a SKU-level budget for the feature (such as {% data variables.product.prodname_copilot_short %} premium requests, {% data variables.product.prodname_spark_short %} premium requests, or {% data variables.copilot.copilot_coding_agent %} premium requests).
 
 1. Under "Budget scope", set the scope of spending for this budget.
 1. Under "Budget", set a budget amount.
@@ -84,25 +64,29 @@ You can set budgets and receive alerts when your usage reaches 75%, 90%, or 100%
    >[!IMPORTANT] If you do not select **Stop usage when budget limit is reached**, you will be notified by email if you exceed your budget, but usage **will not** be stopped.
 
 1. To receive an alert if your budget has reached 75%, 90% and 100% thresholds, select **Receive budget threshold alerts** under "Alerts". When the budget has reached the specific threshold, you will be notified via email and a banner on {% data variables.product.github %}. You may opt out at any time.
-1. Click **Create budget**.
+{% data reusables.billing.budget-create-button %}
 
 To edit or delete a budget, on the "Budget and alerts" page, click **Edit** or **Delete** next to the budget you want to edit or delete. Follow the prompts.
 
 ## Managing budgets for your organization or enterprise
 
-You can manage budgets for your organization or enterprise by setting a budget, viewing budgets, and editing or deleting budgets.
+> [!IMPORTANT]
+> * {% data reusables.billing.pru-sku-split-notice %}
+> * Existing {% data variables.product.prodname_copilot_short %} premium request budgets will automatically migrate to a **bundled premium requests budget** on November 1, 2025. This ensures that your budget continues to account for all of your premium request usage.
+
+You can set budgets and receive alerts when your usage of a product or license type reaches 75%, 90%, or 100% of a defined budget. For budgets that control metered use of a product, you can also block further use when the budget is exhausted. Each budget has a scope.
+
+* **Organization budget scopes**: the whole organization or a single repository within the organization
+* **Enterprise budget scopes**:
+  * Metered products: the whole enterprise, a single organization, a single repository, or a single cost center
+  * Enterprise licenses (metered): the whole enterprise or a single cost center
 
 ### Viewing budgets
 
-If you are an organization owner, enterprise owner, or billing manager, your budget is listed at the top of the "Budgets and alerts" page, followed by budgets for smaller scopes.
+If you are an organization owner, enterprise owner, or billing manager, any account-level budget is listed at the top of the "Budgets and alerts" page, followed by budgets for smaller scopes.
 
-1. Display the settings for the organization or enterprise account you want to view data for. For example, using the context switcher shown on all personal and organization account settings pages.
-
-   ![Screenshot of the "Public profile" settings for The Octocat. Next to "Your personal profile," a "Switch settings context" link is outlined in orange.](/assets/images/help/settings/context-switcher-button.png)
-
-1. Click **{% octicon "credit-card" aria-hidden="true" aria-label="credit-card" %} Billing & Licensing** to display the billing and licensing overview for the account:
-   * **Organization** accounts: under "Access" in the sidebar for settings.
-   * **Enterprise** accounts: a separate tab at the top of the page.
+{% data reusables.billing.nav-to-org-or-ent %}
+{% data reusables.billing.access-org-or-ent-page %}
 
 1. Click **Budgets and alerts**.
 1. Optionally, in the enterprise view only, to filter by scope, select **Scope**, then choose a scope.
@@ -112,9 +96,15 @@ If you are an organization owner, enterprise owner, or billing manager, your bud
 As the owner of an enterprise or organization account, or as a billing manager, you can set a budget at the account level, or at any level below this.
 
 1. In the "Budgets and alerts" view, click **New budget**.
+1. Under "Budget Type" select **Product-level budget**, **SKU-level budget**, or **Bundled premium requests budget**.
+
+   * To limit spending at a Product-level, in "Product-level budget" choose a product from the dropdown, for example: {% data variables.product.prodname_codespaces %}.
+   * To limit spending at a SKU-level, in "SKU-level budget" choose a Product and then a SKU, for example: {% data variables.product.prodname_copilot_short %} and {% data variables.product.prodname_copilot_short %} Premium Request.
+To limit spending on premium requests across all features, enable "Bundled premium requests budget" or to limit spending for a specific feature, set a SKU-level budget for the feature (such as {% data variables.product.prodname_copilot_short %} premium requests, {% data variables.product.prodname_spark_short %} premium requests, or {% data variables.copilot.copilot_coding_agent %} premium requests).
+1. Under "Budget scope", set the scope of spending for this budget.
 1. Under "Budget", set a budget amount.
 
-   To stop any usage and further spending once your {% ifversion fpt %}organization{% elsif ghec %}enterprise or organization{% endif %} reaches the budget limit, select **Stop usage when budget limit is reached**, if available.
+   To stop any usage and further spending once the budget limit is reached, select **Stop usage when budget limit is reached**, if available.
 
    >[!IMPORTANT] If you do not select **Stop usage when budget limit is reached**, you will be notified by email if you exceed your budget, but usage **will not** be stopped.
 
@@ -122,11 +112,11 @@ As the owner of an enterprise or organization account, or as a billing manager, 
 
    Under "Alert Recipients", select the people who will receive the alerts.
 
-1. Click **Create budget**.
+{% data reusables.billing.budget-create-button %}
 
 ### Editing or deleting a budget
 
->[!IMPORTANT] Deleting a budget may remove any limits on spending, depending on your other existing budgets. For example, deleting the default $0 budget for {% data variables.product.prodname_copilot_short %} premium requests allows for unlimited usage.
+>[!IMPORTANT] Deleting a budget may remove any limits on spending, depending on your other existing budgets.
 
 You can edit or delete a budget at any time, but you cannot change the scope of a budget after creating it.
 

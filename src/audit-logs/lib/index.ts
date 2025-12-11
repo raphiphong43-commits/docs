@@ -3,6 +3,7 @@ import path from 'path'
 import { readCompressedJsonFileFallback } from '@/frame/lib/read-json-file'
 import { getOpenApiVersion } from '@/versions/lib/all-versions'
 import findPage from '@/frame/lib/find-page'
+import type { Context, Page } from '@/types'
 import type {
   AuditLogEventT,
   CategorizedEvents,
@@ -30,8 +31,8 @@ export function getCategoryNotes(): CategoryNotes {
   return auditLogConfig.categoryNotes || {}
 }
 
-type TitleResolutionContext = {
-  pages: Record<string, any>
+type TitleResolutionContext = Context & {
+  pages: Record<string, Page>
   redirects: Record<string, string>
 }
 
@@ -61,7 +62,7 @@ async function resolveReferenceLinksToTitles(
           currentVersion: 'free-pro-team@latest',
           pages: context.pages,
           redirects: context.redirects,
-        }
+        } as unknown as Context
         const title = await page.renderProp('title', renderContext, { textOnly: true })
         titles.push(title)
       } else {
@@ -96,7 +97,7 @@ async function resolveReferenceLinksToTitles(
 //     docs_reference_links: 'event reference links'
 //   },
 // ]
-export function getAuditLogEvents(page: string, version: string) {
+export function getAuditLogEvents(page: string, version: string): AuditLogEventT[] {
   const openApiVersion = getOpenApiVersion(version)
   const auditLogFileName = path.join(AUDIT_LOG_DATA_DIR, openApiVersion, `${page}.json`)
 
@@ -115,14 +116,14 @@ export function getAuditLogEvents(page: string, version: string) {
       ?.set(page, readCompressedJsonFileFallback(auditLogFileName))
   }
 
-  const auditLogEvents = auditLogEventsCache.get(openApiVersion)?.get(page)!
+  const auditLogEvents = auditLogEventsCache.get(openApiVersion)?.get(page)
   // If an event doesn't yet have a description (value will be empty string or
   // "N/A"), then we don't show the event.
-  const filteredAuditLogEvents = auditLogEvents.filter(
+  const filteredAuditLogEvents = auditLogEvents?.filter(
     (event) => event.description !== 'N/A' && event.description !== '',
   )
 
-  return filteredAuditLogEvents
+  return filteredAuditLogEvents || []
 }
 
 // get categorized audit log event data for the requested page and version
@@ -137,7 +138,7 @@ export function getAuditLogEvents(page: string, version: string) {
 //   repo: [ [Object] ],
 //   user: [ [Object], [Object] ]
 // }
-export function getCategorizedAuditLogEvents(page: string, version: string) {
+export function getCategorizedAuditLogEvents(page: string, version: string): CategorizedEvents {
   const events = getAuditLogEvents(page, version)
   const openApiVersion = getOpenApiVersion(version)
 
@@ -148,7 +149,7 @@ export function getCategorizedAuditLogEvents(page: string, version: string) {
     categorizedAuditLogEventsCache.get(openApiVersion)?.set(page, categorizeEvents(events))
   }
 
-  return categorizedAuditLogEventsCache.get(openApiVersion)?.get(page)!
+  return categorizedAuditLogEventsCache.get(openApiVersion)?.get(page) || {}
 }
 
 // Filters audit log events based on allowlist values.
@@ -317,14 +318,14 @@ export async function filterAndUpdateGhesDataByAllowlistValues({
 // Categorizes the given array of audit log events by event category
 function categorizeEvents(events: AuditLogEventT[]) {
   const categorizedEvents: CategorizedEvents = {}
-  events.forEach((event) => {
+  for (const event of events) {
     const [category] = event.action.split('.')
     if (!Object.hasOwn(categorizedEvents, category)) {
       categorizedEvents[category] = []
     }
 
     categorizedEvents[category].push(event)
-  })
+  }
 
   return categorizedEvents
 }

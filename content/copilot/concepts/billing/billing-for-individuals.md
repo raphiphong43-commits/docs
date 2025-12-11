@@ -1,5 +1,5 @@
 ---
-title: About billing for individual Copilot plans
+title: About billing for individual GitHub Copilot plans
 shortTitle: Billing for individuals
 intro: 'Learn how billing works for {% data variables.copilot.copilot_pro_short %} and {% data variables.copilot.copilot_pro_plus_short %}.'
 versions:
@@ -14,6 +14,8 @@ redirect_from:
   - /copilot/concepts/copilot-billing/about-billing-for-individual-copilot-plans
   - /copilot/concepts/copilot-billing/billing-for-individuals
 contentType: concepts
+category: 
+  - Learn about Copilot
 ---
 
 ## Pricing for {% data variables.copilot.copilot_pro_short %} and {% data variables.copilot.copilot_pro_plus_short %}

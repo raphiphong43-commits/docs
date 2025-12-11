@@ -31,7 +31,7 @@ topics:
 contentType: get-started
 ---
 
-<!-- 
+<!--
 Audience: All users
 JTBD: When I decide I want to pay for increased access, I need to understand what and how GitHub will charge me, so that I feel confident that I have been billed correctly and don't get any surprises. -->
 
@@ -41,7 +41,7 @@ You can use {% data variables.product.github %} without incurring any costs. If 
 
 * **{% data variables.product.github %} plans**: A fixed monthly cost for a paid {% data variables.product.github %} account (for example: {% data variables.product.prodname_pro %} or {% data variables.product.prodname_team %}) or {% data variables.product.prodname_copilot_short %} plan.
 * **Subscriptions**: Fixed monthly costs for any additional products you subscribe to (for example: {% data variables.product.prodname_GH_secret_protection %})
-* **Metered usage**: Variable costs that depend on how much you use certain features above the amounts included with your {% data variables.product.github %} plan (for example: {% data variables.product.prodname_actions %}). For more information see, [AUTOTITLE](/billing/reference/product-usage-included) and [AUTOTITLE](/billing/tutorials/set-up-budgets).
+* **Metered usage**: Variable costs that depend on how much you use certain features above the amounts included with your {% data variables.product.github %} plan (for example: {% data variables.product.prodname_actions %}). For more information see, [AUTOTITLE](/billing/reference/product-usage-included) and [AUTOTITLE](/billing/concepts/budgets-and-alerts).
 
 > [!TIP]
 > {% data variables.product.github %} has discounted plans for verified students and academic faculties, and for non-profit organizations. For more information, see [AUTOTITLE](/billing/managing-the-plan-for-your-github-account/discounted-plans-for-github-accounts).
@@ -61,9 +61,19 @@ If required, {% data variables.product.prodname_ghe_cloud %} accounts can reques
 
 Each account has a **billing date** and a **billing cycle**.
 
-For credit card and PayPal payments, the billing date is the day you started a paid plan (not necessarily when the account was created). For example, if you started a paid plan on the 15th of a month, you will be billed on the 15th of each subsequent month. For payments using an Azure subscription ID, the billing date is available in the Azure commerce portal.
+For **personal and organization accounts** set up for credit card and PayPal payments, the **billing date** is typically the day you started a paid plan (not necessarily when the account was created). For example, if you started a paid plan on the 15th of a month, you will be billed on the 15th of each subsequent month. For payments using an Azure subscription ID, the billing date is available in the Azure commerce portal.
 
-Most users pay for {% data variables.product.github %} using metered billing. The billing cycle for all metered products is a fixed period from the first day to the last day of the month.
+For **enterprise accounts**, your **billing date** will vary. See [AUTOTITLE](/billing/concepts/billing-cycles).
+
+Most users pay for {% data variables.product.github %} using metered billing. The **billing cycle** for all metered products is a fixed period from the first day to the last day of the month.
+
+### Authorization holds
+
+You may see an authorization hold on your provided payment method upon initiating a subscription or trial. Depending on your bank or card issuer, this may result in the appearance of a transaction or charge.
+
+Authorization holds are temporary and released as quickly as possible. If the authorization hold persists for longer than 10 business days, we suggest reaching out to your bank or card issuer.
+
+If the authorization is unsuccessful, the chosen service will not be activated and the account may be locked. For more more information, see [AUTOTITLE](/billing/how-tos/troubleshooting/locked-account#unlocking-an-accounts-features-due-to-a-failed-authorization-hold).
 
 ## How do I see what I'm billed for?
 

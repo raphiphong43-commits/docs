@@ -149,18 +149,30 @@ We should only use a CTA when the answer to both questions is yes.
 
 A CTA is an explicit direction to the user to take an immediate action, such as “Try Copilot for free” or “Create your own repository”. A CTA in our documentation should only lead people to a {% data variables.product.company_short %}-owned domain.
 
-For example, the CTA on [AUTOTITLE](/enterprise-cloud@latest/admin/overview/setting-up-a-trial-of-github-enterprise-cloud) links to [an enterprise sales page](https://github.com/account/enterprises/new?ref_cta=GHEC+trial&ref_loc=setting+up+a+trial+of+github+enterprise+cloud&ref_page=docs) on {% data variables.product.prodname_dotcom_the_website %}.
+For example, the CTA on [AUTOTITLE](/enterprise-cloud@latest/admin/overview/setting-up-a-trial-of-github-enterprise-cloud) links to [an enterprise sales page](https://github.com/account/enterprises/new?ref_product=ghec&ref_type=trial&ref_style=text&ref_plan=enterprise) on {% data variables.product.prodname_dotcom_the_website %}.
 
-Style a CTA using the following format.
+### Building CTAs
 
-```html
-{% raw %}<a href="https://github.com/DESTINATION/URL?ref_cta=CTA+NAME&ref_loc=LOCATION&ref_page=docs" target="_blank" class="btn btn-primary mt-3 mr-3 no-underline"><span>Try PRODUCT NAME</span> {% octicon "link-external" height:16 %}</a>{% endraw %}
+To build a valid CTA URL with the correct parameters, use the CTA builder script in your docs repository checkout:
+
+```shell
+npm run cta-builder
 ```
 
-Replace the placeholders with the relevant information for your CTA.
-* `DESTINATION/URL`: The URL that the button should navigate to.
-* `CTA+NAME`: The name of the CTA. For example, `GHEC+trial` or `Copilot+Business+Trial`.
-* `LOCATION`: The location in {% data variables.product.prodname_docs %} of the CTA. For example, `Setting+up+a+trial+of+GitHub+Enterprise+Cloud`.
+The script will guide you through an interactive process to:
+* Select the appropriate {% data variables.product.company_short %} product (`ref_product`)
+  * Use `github` as the default when the link is not specific to a particular feature or product
+* Choose the type of action (`ref_type`)
+* Specify the formatting style (`ref_style`)
+* Optionally select a specific plan (`ref_plan`)
+
+The script provides all available options for each parameter and generates a complete, valid CTA URL at the end. Use this tool to ensure you're using current, approved values for CTA parameters.
+
+For example, the script might generate a URL like:
+
+```
+https://github.com/account/enterprises/new?ref_product=ghec&ref_type=trial&ref_style=button&ref_plan=enterprise
+```
 
 ## Code
 
@@ -551,7 +563,7 @@ For presenting keyboard shortcuts, follow the [Microsoft Style Guide](https://do
 
 ### Usage highlights
 
-Below are some usage highlights for how we present keyboard shortcuts in our documentation:
+Here are some usage highlights for how we present keyboard shortcuts in our documentation:
 
 * The basic syntax is to show keys with `+` between key combinations, without any spaces.
 
@@ -592,7 +604,7 @@ Below are some usage highlights for how we present keyboard shortcuts in our doc
 
 Do not create reusables for license attributions. We must use the exact license a project is licensed under, so any attributions must be accurately written for the articles that they appear in.
 
-If you are unsure of the legality of reusing any content, contact legal. If you are adding content with a license that is not listed below, you must receive a legal review before you can publish the content.
+If you are unsure of the legality of reusing any content, contact legal. If you are adding content with a license that is not listed here, you must receive a legal review before you can publish the content.
 
 ### Attributing MIT-licensed content
 
@@ -810,19 +822,6 @@ If multiple roles or products apply to a permission statement or product callout
 
 You can use inline links to provide more information about a role or product. The linked text must match the link destination so that it is clear where following the link will lead to.
 
-## Parenthetical dashes
-
-We use em dashes for parenthetical statements in normal body text. This doesn’t apply to text within code blocks.
-
-Examples:
-
-* ✅ Correct: "The cat—which sat on a branch—smiled with a broad grin." (em dash without spaces)
-* ❌ Incorrect: "The cat — which sat on a branch — smiled with a broad grin." (em dash with spaces)
-* ❌ Incorrect: "The cat–which sat on a branch–smiled with a broad grin." (en dash without spaces)
-* ❌ Incorrect: "The cat – which sat on a branch – smiled with a broad grin." (en dash with spaces)
-* ❌ Incorrect: "The cat-which sat on a branch-smiled with a broad grin." (hyphen without spaces)
-* ❌ Incorrect: "The cat - which sat on a branch - smiled with a broad grin." (hyphen with spaces)
-
 ## Placeholders
 
 Style any placeholder text in all caps. If a placeholder is multiple words, connect the words with dashes (kebab-case). If you use a placeholder, explain what someone might replace it with. This helps people modify examples to fit their needs and helps identify placeholders for people who use assistive technology.
@@ -881,12 +880,6 @@ Do not capitalize commonly used features like pull requests, topics, or issues.
 ## Product-specific conventions
 
 This section describes additional conventions that are specific to GitHub products.
-
-### {% data variables.product.prodname_copilot %}
-
-#### {% data variables.product.prodname_copilot_short %} code completion
-
-The {% data variables.product.prodname_copilot_short %} feature that suggests code as you are working on a file is called "{% data variables.product.prodname_copilot_short %} code completion" or just "code completion" (singular). Only use "code suggestions" (plural) when referring to multiple instances of code completion suggestions. For example, "When using {% data variables.product.prodname_copilot_short %} code completion..." but "the plan includes 2,000 code completions..."
 
 ### {% data variables.product.prodname_actions %}
 
@@ -1270,6 +1263,14 @@ To signal to readers that you've added or changed a note, or to indicate the pub
 
 To signal that we have removed a release note, add an "Errata" section detailing which note you removed and (if relevant) which version the removed note actually pertains to. See [Writing errata](#writing-errata).
 
+## Release references
+
+When referring to a range of releases starting from a particular release, use "or later."
+
+* **Use:** "release 0.41.0 or later"
+* **Avoid:** "release 0.41.0 or above"
+* **Avoid:** "release 0.41.0 or greater"
+
 ## Reusables and variables
 
 Use reusable strings for individual nouns (e.g. product names) or for complete sentences or paragraphs. Sentence fragments and phrases should not be contained in reusable strings as they can cause problems when content is localized. For more information, see the [data directory](https://github.com/github/docs/tree/main/data) in the [`github/docs`](https://github.com/github/docs) repository, [Creating reusable content](/contributing/writing-for-github-docs/creating-reusable-content), and the [Product names](#product-names) section of this document.
@@ -1445,14 +1446,14 @@ The following example shows part of a table from [AUTOTITLE](/code-security/depe
 <td align=center>
 {% octicon "check" aria-label="Supported" %}
 </td>
-</td>
+
 <td align=center>
 {% octicon "x" aria-label="Not supported" %}
 </td>
 <td align=center>
 {% octicon "check" aria-label="Supported" %}
 </td>
-</td>
+
 <td align=left>Location of package manifests</td>
 </tr>
 <tr>
@@ -1460,14 +1461,14 @@ The following example shows part of a table from [AUTOTITLE](/code-security/depe
 <td align=center>
 {% octicon "check" aria-label="Supported" %}
 </td>
-</td>
+
 <td align=center>
 {% octicon "x" aria-label="Not supported" %}
 </td>
 <td align=center>
 {% octicon "check" aria-label="Supported" %}
 </td>
-</td>
+
 <td align=left>How often to check for updates</td>
 </tr>
 </tbody>

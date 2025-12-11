@@ -1,8 +1,8 @@
 ---
-title: Reviewing a pull request created by Copilot
+title: Reviewing a pull request created by GitHub Copilot
 shortTitle: Review Copilot PRs
-intro: 'After {% data variables.product.prodname_copilot_short %} creates a pull request you should review it and comment on anything that needs changes.'
-product: '{% data reusables.gated-features.copilot-coding-agent %}<br><a href="https://github.com/features/copilot/plans?ref_cta=Copilot+plans+signup&ref_loc=reviewing+a+pull+request+created+by+copilot&ref_page=docs" target="_blank" class="btn btn-primary mt-3 mr-3 no-underline"><span>Sign up for {% data variables.product.prodname_copilot_short %}</span> {% octicon "link-external" height:16 %}</a>'
+intro: 'After {% data variables.product.prodname_copilot_short %} creates a pull request, you should review it. You can mention `@copilot` to ask {% data variables.product.prodname_copilot_short %} to make changes, or push changes yourself.'
+product: '{% data reusables.gated-features.copilot-coding-agent %}<br><a href="https://github.com/features/copilot/plans?ref_product=copilot&ref_type=engagement&ref_style=button" target="_blank" class="btn btn-primary mt-3 mr-3 no-underline"><span>Sign up for {% data variables.product.prodname_copilot_short %}</span> {% octicon "link-external" height:16 %}</a>'
 versions:
   feature: copilot
 topics:
@@ -14,11 +14,11 @@ redirect_from:
   - /copilot/how-tos/agents/copilot-coding-agent/review-copilot-prs
   - /copilot/how-tos/agents/coding-agent/review-copilot-prs
 contentType: how-tos
+category: 
+  - Author and optimize with Copilot
 ---
 
 > [!NOTE]
-> {% data reusables.copilot.coding-agent.preview-note-text %}
->
 > For an introduction to {% data variables.copilot.copilot_coding_agent %}, see [AUTOTITLE](/copilot/concepts/about-copilot-coding-agent).
 
 ## Reviewing {% data variables.product.prodname_copilot_short %}'s changes
@@ -30,27 +30,23 @@ After {% data variables.product.prodname_copilot_short %} has finished working o
 >
 > Additionally, if the "Require approval of the most recent reviewable push" setting is enabled, the final push to the pull request will require **n + 1 approvals**, where _n_ is the number of required approvals. The person who initiated the original {% data variables.product.prodname_copilot_short %} pull request can't be counted among the required reviewers for that final push—but if someone else requested the latest {% data variables.product.prodname_copilot_short %}-generated change, their approval **can** count.
 
-You can ask {% data variables.product.prodname_copilot_short %} to make changes using pull request comments, or you can check out {% data variables.product.prodname_copilot_short %}'s branch and make changes yourself.
+You can ask {% data variables.product.prodname_copilot_short %} to make changes by mentioning `@copilot` in pull request comments, or you can check out {% data variables.product.prodname_copilot_short %}'s branch and make changes yourself.
 
 > [!TIP]
 > We recommend you batch your review comments instead of submitting them individually.
 
-When you leave a comment on {% data variables.product.prodname_copilot_short %}'s pull request, {% data variables.product.prodname_copilot_short %} will consider your comment, and decide whether to start a new agent session to respond.
-
 {% data reusables.copilot.coding-agent.write-access-required %}
 
-If {% data variables.product.prodname_copilot_short %} starts a new agent session in response to your comment, an eyes emoji (👀) is added as a reaction to the comment, and a "Copilot has started work" event is added to the pull request timeline.
+When {% data variables.product.prodname_copilot_short %} starts a new agent session in response to your comment, an eyes emoji (👀) is added as a reaction to the comment, and a "Copilot has started work" event is added to the pull request timeline.
 
 ![Screenshot of a pull request timeline with a review comment with the eyes reaction and a "Copilot started work" timeline event.](/assets/images/help/copilot/coding-agent/comment-to-agent-on-pr.png)
 
-{% data variables.product.prodname_copilot_short %} may ignore a comment if it considers that the comment was not intended for it. If you are sure that you want {% data variables.product.prodname_copilot_short %} to respond to your comment, you can @mention {% data variables.product.prodname_copilot_short %} by including `@copilot` in your comment.
+When {% data variables.product.prodname_copilot_short %} starts a new session on the same pull request, it remembers context from the previous session, allowing it to work faster and more reliably.
 
-> [!TIP]
-> If you don't want {% data variables.product.prodname_copilot_short %} to respond to comments on a pull request, you can unassign {% data variables.product.prodname_copilot_short %} from the pull request. If you later reassign {% data variables.product.prodname_copilot_short %} to the same pull request it will respond to new comments and push more changes. It will not respond to comments that were added while it was not assigned.
+> [!NOTE]
+> If the pull request was created by a {% data variables.copilot.copilot_custom_agent_short %}, when you mention `@copilot` in pull request comments, the same {% data variables.copilot.copilot_custom_agent_short %} will be used to make further changes. This ensures consistency in the agent's specialized configuration throughout the pull request lifecycle. See [AUTOTITLE](/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents).
 
-As {% data variables.product.prodname_copilot_short %} makes changes to the pull request, it will keep the title and body up to date so they reflect the current changes.
-
-For more information, see the section "Use comments to iterate on a pull request" in [AUTOTITLE](/copilot/tutorials/coding-agent/best-practices#using-comments-to-iterate-on-a-pull-request).
+For more information, see the section "Use comments to iterate on a pull request" in [AUTOTITLE](/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks#using-comments-to-iterate-on-a-pull-request).
 
 ## Managing {% data variables.product.prodname_actions %} workflow runs
 

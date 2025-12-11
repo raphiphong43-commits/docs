@@ -1,5 +1,5 @@
 ---
-title: Managing requests for Copilot Business in your organization
+title: Managing requests for GitHub Copilot Business in your organization
 shortTitle: Manage requests for access
 intro: 'Approve or deny requests for {% data variables.product.prodname_copilot_short %} access in your organization.'
 permissions: Organization owners
@@ -17,6 +17,8 @@ versions:
 topics:
   - Copilot
 contentType: how-tos
+category: 
+  - Manage Copilot for a team
 ---
 
 As an organization owner, you can manage requests for {% data variables.copilot.copilot_for_business %} from your organization's settings. Additionally, {% data variables.product.prodname_dotcom %} sends you a weekly email with a summary of all pending requests.

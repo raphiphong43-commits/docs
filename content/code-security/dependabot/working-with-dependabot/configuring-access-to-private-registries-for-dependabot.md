@@ -119,7 +119,7 @@ When creating a secret in an organization, you can use a policy to limit which r
 
 You can add {% data variables.product.prodname_dependabot %}-related IP addresses to your registries IP allow list.
 
-If your private registry is configured with an IP allow list, you can find the IP addresses {% data variables.product.prodname_dependabot %} uses to access the registry in the meta API endpoint, under the `dependabot` key. If you run {% data variables.product.prodname_dependabot %} on {% data variables.product.prodname_actions %} self-hosted runners, you should instead use the IP addresses under the `actions` key. For more information, see [AUTOTITLE](/rest/meta/meta) and [AUTOTITLE](/code-security/dependabot/working-with-dependabot/about-dependabot-on-github-actions-runners).
+If your private registry is configured with an IP allow list, you can find the IP addresses {% data variables.product.prodname_dependabot %} uses to access the registry in the meta API endpoint, under the `actions` key. For more information, see [AUTOTITLE](/rest/meta/meta) and [AUTOTITLE](/code-security/dependabot/working-with-dependabot/about-dependabot-on-github-actions-runners).
 
 {% endif %}
 
@@ -165,6 +165,7 @@ Examples of how to configure access to the private registries supported by {% da
 * [`composer-repository`](#composer-repository)
 * [`docker-registry`](#docker-registry)
 * [`git`](#git)
+* [`goproxy-server`](#goproxy-server)
 * [`hex-organization`](#hex-organization)
 * [`hex-repository`](#hex-repository)
 * [`maven-repository`](#maven-repository)
@@ -257,11 +258,30 @@ registries:
 
 {% endraw %}
 
+### `goproxy-server`
+
+The `goproxy-server` type supports username and password. {% data reusables.dependabot.password-definition %}
+
+{% data reusables.dependabot.dependabot-updates-path-match %}
+
+{% raw %}
+
+```yaml copy
+registries:
+  my-private-registry:
+    type: goproxy-server
+    url: https://acme.jfrog.io/artifactory/api/go/my-repo
+    username: octocat
+    password: ${{secrets.MY_GO_REGISTRY_TOKEN}}
+```
+
+{% endraw %}
+
 {% ifversion dependabot-helm-support %}
 
 ### `helm-registry`
 
-{% data variables.product.prodname_dependabot %} works with any OCI-compliant registries that implement the Open Container Initiative (OCI) Distribution Specification. For more information, see [Open Container Initiative Distribution Specification](https://github.com/opencontainers/distribution-spec/blob/main/spec.md) in the `opencontainers/distribution-spec` repository. {% data variables.product.prodname_dependabot %} supports authentication to private registries via a central token service or HTTP Basic Auth. For further details, see [Token Authentication Specification](https://helm.sh/docs/helm/helm_registry_login/) in the Docker documentation and [Basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) on Wikipedia.
+The `helm-registry` type only supports HTTP Basic Auth and does not support OCI-compliant registries. If you need to access an OCI-compliant registry for Helm charts, configure a [`docker-registry`](#docker-registry) instead.
 
 The `helm-registry` type supports username and password. {% data reusables.dependabot.password-definition %}
 

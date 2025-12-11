@@ -2420,7 +2420,7 @@
   },
   {
     "action": "merge_queue.pull_request_dequeued",
-    "description": "N/A",
+    "description": "A pull request was removed from a merge queue.",
     "docs_reference_links": "N/A",
     "fields": [
       "actor",
@@ -2440,7 +2440,7 @@
   },
   {
     "action": "merge_queue.pull_request_queue_jump",
-    "description": "N/A",
+    "description": "A pull request was moved ahead in a merge queue.",
     "docs_reference_links": "N/A",
     "fields": [
       "user_agent",
@@ -2464,7 +2464,7 @@
   },
   {
     "action": "merge_queue.queue_cleared",
-    "description": "N/A",
+    "description": "A merge queue was cleared.",
     "docs_reference_links": "N/A",
     "fields": [
       "actor",
@@ -2483,7 +2483,7 @@
   },
   {
     "action": "merge_queue.update_settings",
-    "description": "N/A",
+    "description": "The settings for a merge queue were updated.",
     "docs_reference_links": "N/A",
     "fields": [
       "actor",
@@ -3757,7 +3757,7 @@
       "actor",
       "operation_type"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/personalizing-your-profile"
+    "docs_reference_titles": "Personalize your profile"
   },
   {
     "action": "project.access",
@@ -4326,7 +4326,7 @@
       "token_scopes",
       "programmatic_access_type"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository"
+    "docs_reference_titles": "Inviting collaborators to a personal repository"
   },
   {
     "action": "repo.add_topic",
@@ -4622,8 +4622,8 @@
   },
   {
     "action": "repo.configure_self_hosted_jit_runner",
-    "description": "N/A",
-    "docs_reference_links": "N/A",
+    "description": "A new just-in-time GitHub Actions self-hosted runner was configured",
+    "docs_reference_links": "/rest/actions/self-hosted-runners#create-configuration-for-a-just-in-time-runner-for-a-repository",
     "fields": [
       "user_agent",
       "request_id",
@@ -4645,7 +4645,8 @@
       "created_at",
       "operation_type",
       "request_access_security_header"
-    ]
+    ],
+    "docs_reference_titles": "/rest/actions/self-hosted-runners#create-configuration-for-a-just-in-time-runner-for-a-repository"
   },
   {
     "action": "repo.create",
@@ -5122,7 +5123,7 @@
       "token_scopes",
       "programmatic_access_type"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/removing-a-collaborator-from-a-personal-repository"
+    "docs_reference_titles": "Removing a collaborator from a personal repository"
   },
   {
     "action": "repo.remove_self_hosted_runner",
@@ -6412,7 +6413,7 @@
       "created_at",
       "_document_id"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/maintaining-ownership-continuity-of-your-personal-accounts-repositories"
+    "docs_reference_titles": "Maintaining ownership continuity of your personal account's repositories"
   },
   {
     "action": "successor_invitation.cancel",
@@ -6429,7 +6430,7 @@
       "created_at",
       "_document_id"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/maintaining-ownership-continuity-of-your-personal-accounts-repositories"
+    "docs_reference_titles": "Maintaining ownership continuity of your personal account's repositories"
   },
   {
     "action": "successor_invitation.create",
@@ -6446,7 +6447,7 @@
       "created_at",
       "_document_id"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/maintaining-ownership-continuity-of-your-personal-accounts-repositories"
+    "docs_reference_titles": "Maintaining ownership continuity of your personal account's repositories"
   },
   {
     "action": "successor_invitation.decline",
@@ -6463,7 +6464,7 @@
       "created_at",
       "_document_id"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/maintaining-ownership-continuity-of-your-personal-accounts-repositories"
+    "docs_reference_titles": "Maintaining ownership continuity of your personal account's repositories"
   },
   {
     "action": "successor_invitation.destroy",
@@ -6496,7 +6497,7 @@
       "created_at",
       "_document_id"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/maintaining-ownership-continuity-of-your-personal-accounts-repositories"
+    "docs_reference_titles": "Maintaining ownership continuity of your personal account's repositories"
   },
   {
     "action": "trusted_device.register",
@@ -6816,7 +6817,7 @@
       "created_at",
       "request_access_security_header"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/adding-an-email-address-to-your-github-account"
+    "docs_reference_titles": "Adding an email address to your GitHub account"
   },
   {
     "action": "user.async_delete",
@@ -7340,7 +7341,7 @@
       "operation_type",
       "request_access_security_header"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/showing-your-private-contributions-and-achievements-on-your-profile"
+    "docs_reference_titles": "Manage visibility settings for private contributions"
   },
   {
     "action": "user.login",
@@ -7558,7 +7559,7 @@
       "created_at",
       "request_access_security_header"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/showing-your-private-contributions-and-achievements-on-your-profile"
+    "docs_reference_titles": "Manage visibility settings for private contributions"
   },
   {
     "action": "user.sign_in_from_unrecognized_device",
@@ -7644,7 +7645,7 @@
       "token_scopes",
       "programmatic_access_type"
     ],
-    "docs_reference_titles": "/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/personalizing-your-profile#setting-a-status"
+    "docs_reference_titles": "Personalize your profile"
   },
   {
     "action": "user.suspend",

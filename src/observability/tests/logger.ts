@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { createLogger } from '@/observability/logger'
 
@@ -326,10 +325,6 @@ describe('createLogger', () => {
 
     beforeEach(() => {
       logger = createLogger('file:///path/to/test.js')
-    })
-
-    it('should include logger context in production logs', () => {
-      // TODO
     })
 
     it('should handle missing logger context gracefully in development', () => {

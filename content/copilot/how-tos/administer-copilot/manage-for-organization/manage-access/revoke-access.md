@@ -1,5 +1,5 @@
 ---
-title: Revoking access to Copilot for members of your organization
+title: Revoking access to GitHub Copilot for members of your organization
 shortTitle: Revoke access
 intro: 'Remove access to {% data variables.product.prodname_copilot %} for some or all of the members of your organization.'
 permissions: 'Organization owners for organizations with a {% ifversion ghec %}{% data variables.copilot.copilot_enterprise_short %} or{% endif %} {% data variables.copilot.copilot_business_short %} plan.'
@@ -16,6 +16,8 @@ redirect_from:
   - /copilot/how-tos/administer/organizations/manage-access/revoke-access
   - /copilot/how-tos/administer/manage-for-organization/manage-access/revoke-access
 contentType: how-tos
+category: 
+  - Manage Copilot for a team
 ---
 
 ## How revoking access affects billing

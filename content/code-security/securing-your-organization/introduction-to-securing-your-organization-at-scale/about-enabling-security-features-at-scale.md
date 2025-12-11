@@ -27,7 +27,7 @@ topics:
 
 You can easily enable and manage {% data variables.product.github %}'s security features throughout your organization with {% data variables.product.prodname_security_configurations %}, which control repository-level security features, and {% data variables.product.prodname_global_settings %}, which control security features at the organization level. We recommend applying {% data variables.product.prodname_security_configurations %} _and_ customizing your {% data variables.product.prodname_global_settings %} to create a system that best meets the security needs of your organization.
 
-For more information on purchasing {% data variables.product.prodname_GH_cs_or_sp %}, see [AUTOTITLE](/get-started/learning-about-github/about-github-advanced-security).
+For more information on purchasing {% data variables.product.prodname_GH_cs_or_sp %}, see [AUTOTITLE](/get-started/learning-about-github/about-github-advanced-security) and [AUTOTITLE](/enterprise-cloud@latest/billing/how-tos/products/add-advanced-security){% ifversion fpt or ghes %} in the {% data variables.product.prodname_ghe_cloud %} documentation{% endif %}.
 
 ## About {% data variables.product.prodname_security_configurations %}
 
@@ -48,6 +48,8 @@ You can customize {% data variables.product.prodname_security_configurations %},
 
 You will only ever see enablement settings for features that have been installed on your {% data variables.product.prodname_ghe_server %} instance by an enterprise administrator.
 
+To learn how to create {% data variables.product.prodname_custom_security_configurations %}, see [AUTOTITLE](/code-security/securing-your-organization/enabling-security-features-in-your-organization/creating-a-custom-security-configuration).
+
 {% endif %}
 
 {% data reusables.code-scanning.custom-security-configuration-enforcement-edge-cases %}
@@ -67,6 +69,14 @@ While {% data variables.product.prodname_security_configurations %} determine re
 ## About enabling secure access to private registries
 
 If your organization uses private registries, providing {% data variables.product.prodname_code_scanning %} and {% data variables.product.prodname_dependabot %} secure access to these registries will improve code analysis and allow {% data variables.product.prodname_dependabot %} to update a wider range of dependencies. For information, see [AUTOTITLE](/code-security/securing-your-organization/enabling-security-features-in-your-organization/giving-org-access-private-registries).
+
+{% endif %}
+
+{% ifversion fpt or ghec %}
+
+## About integrating production context
+
+If your organization uses {% data variables.product.prodname_microsoft_defender %}, JFrog Artifactory, or CI/CD to promote artifacts to production, you can integrate this data into {% data variables.product.github %}. This production context helps you prioritize {% data variables.product.prodname_code_scanning %} and {% data variables.product.prodname_dependabot %} alerts. For more information, see [AUTOTITLE](/code-security/securing-your-organization/understanding-your-organizations-exposure-to-vulnerabilities/alerts-in-production-code).
 
 {% endif %}
 

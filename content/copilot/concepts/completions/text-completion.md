@@ -1,5 +1,5 @@
 ---
-title: Copilot text completion
+title: GitHub Copilot text completion
 shortTitle: Text completion
 allowTitleToDifferFromFilename: true
 intro: 'Learn about {% data variables.copilot.copilot_autocomplete_pr %}.'
@@ -9,6 +9,8 @@ permissions: 'Members of an enterprise with a subscription to [{% data variables
 topics:
   - Copilot
 contentType: concepts
+category: 
+  - Learn about Copilot
 ---
 
 {% data reusables.copilot.text-completion-preview %}

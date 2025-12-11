@@ -1,5 +1,5 @@
 ---
-title: AI models for Copilot
+title: AI models for GitHub Copilot
 shortTitle: Use AI models
 intro: 'Learn how to use alternative large language models for {% data variables.product.prodname_copilot %}.'
 versions:
@@ -10,10 +10,9 @@ children:
   - /configure-access-to-ai-models
   - /change-the-chat-model
   - /change-the-completion-model
-  - /create-a-custom-model
 redirect_from:
   - /copilot/using-github-copilot/ai-models
   - /copilot/how-tos/ai-models
+  - /copilot/how-tos/use-ai-models/create-a-custom-model
 contentType: how-tos
 ---
-

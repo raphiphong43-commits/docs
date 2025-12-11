@@ -5,7 +5,7 @@ import walk from 'walk-sync'
 import yaml from 'js-yaml'
 import { isRegExp, setWith } from 'lodash-es'
 import filenameToKey from './filename-to-key'
-import matter from 'gray-matter'
+import matter from '@gr2m/gray-matter'
 
 interface DataDirectoryOptions {
   preprocess?: (content: string) => string
@@ -54,7 +54,7 @@ export default function dataDirectory(
     fs.readFileSync(filename, 'utf8'),
   ])
 
-  files.forEach(([filename, fileContent]) => {
+  for (const [filename, fileContent] of files) {
     // derive `foo.bar.baz` object key from `foo/bar/baz.yml` filename
     const key = filenameToKey(path.relative(dir, filename))
     const extension = path.extname(filename).toLowerCase()
@@ -84,7 +84,7 @@ export default function dataDirectory(
         setWith(data, key, matter(processedContent).content, Object)
         break
     }
-  })
+  }
 
   return data
 }

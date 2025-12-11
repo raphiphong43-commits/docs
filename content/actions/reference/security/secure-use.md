@@ -105,7 +105,29 @@ For more information, see [AUTOTITLE](/code-security/code-scanning/introduction-
 
 To help mitigate the risk of an exposed token, consider restricting the assigned permissions. For more information, see [AUTOTITLE](/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token).
 
-### Using third-party actions
+{% ifversion custom-org-roles %}
+
+## Mitigating the risks of untrusted code checkout
+
+Similar to script injection attacks, untrusted pull request content that automatically triggers actions processing can also pose a security risk. The `pull_request_target` and `workflow_run` workflow triggers, when used with the checkout of an untrusted pull request, expose the repository to security compromises. These workflows are privileged, which means they share the same cache of the main branch with other privileged workflow triggers, and may have repository write access and access to referenced secrets. These vulnerabilities can be exploited to take over a repository.
+
+For more information on these triggers, how to use them, and the associated risks, see [AUTOTITLE](/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#pull_request_target) and [AUTOTITLE](/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#workflow_run).
+
+For additional examples and guidance on the risks of untrusted code checkout, see [Preventing pwn requests](https://securitylab.github.com/research/github-actions-preventing-pwn-requests/) from {% data variables.product.prodname_security %} and the [Dangerous-Workflow](https://github.com/ossf/scorecard/blob/main/docs/checks.md#dangerous-workflow) documentation from OpenSSF Scorecard.
+
+### Good practices
+
+* Avoid using the `pull_request_target` workflow trigger if it's not necessary. For privilege separation between workflows, `workflow_run` is a better trigger. Only use these workflow triggers when the workflow actually needs the privileged context.
+
+* Avoid using the `pull_request_target` and `workflow_run` workflow triggers with untrusted pull requests or code content. Workflows that use these triggers must not explicitly check out untrusted code, including from pull request forks or from repositories that are not under your control. Workflows triggered on `workflow_run` should treat artifacts uploaded from other workflows with caution.
+
+* {% data variables.product.prodname_codeql %} can scan and detect potentially vulnerable {% data variables.product.prodname_actions %} workflows. You can configure default setup for the repository, and ensure that {% data variables.product.prodname_actions %} scanning is enabled. For more information, see [AUTOTITLE](/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning).
+
+* OpenSSF Scorecards can help you identify potentially vulnerable workflows, along with other security risks when using {% data variables.product.prodname_actions %}. See [Using OpenSSF Scorecards to secure workflow dependencies](#using-openssf-scorecards-to-secure-workflow-dependencies) later in this article.
+
+{% endif %}
+
+## Using third-party actions
 
 The individual jobs in a workflow can interact with (and compromise) other jobs. For example, a job querying the environment variables used by a later job, writing files to a shared directory that a later job processes, or even more directly by interacting with the Docker socket and inspecting other running containers and executing commands in them.
 
@@ -113,9 +135,21 @@ This means that a compromise of a single action within a workflow can be very si
 
 You can help mitigate this risk by following these good practices:
 
-* **Pin actions to a full length commit SHA**
+* **Pin actions to a full-length commit SHA**
 
-  Pinning an action to a full length commit SHA is currently the only way to use an action as an immutable release. Pinning to a particular SHA helps mitigate the risk of a bad actor adding a backdoor to the action's repository, as they would need to generate a SHA-1 collision for a valid Git object payload. {% data reusables.actions.actions-pin-commit-sha %}
+  Pinning an action to a full-length commit SHA is currently the only way to use an action as an immutable release. Pinning to a particular SHA helps mitigate the risk of a bad actor adding a backdoor to the action's repository, as they would need to generate a SHA-1 collision for a valid Git object payload. {% data reusables.actions.actions-pin-commit-sha %}
+
+  For an example of using a full-length commit SHA in a workflow, see [AUTOTITLE](/actions/how-tos/write-workflows/choose-what-workflows-do/find-and-customize-actions#using-shas).
+  
+  {%- ifversion actions-blocklist-sha-pinning %}
+  
+  {% data variables.product.github %} offers policies at the {% ifversion ghec or ghes %}repository, organization, and enterprise{% else %}repository and organization{% endif %} level to require actions to be pinned to a full-length commit SHA:
+    * To configure the policy at the repository level, see [AUTOTITLE](/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#managing-github-actions-permissions-for-your-repository).
+    * To configure the policy at the organization level, see [AUTOTITLE](/organizations/managing-organization-settings/disabling-or-limiting-github-actions-for-your-organization#managing-github-actions-permissions-for-your-organization).
+    {%- ifversion ghec or ghes %}
+    * To configure the policy at the enterprise level, see [AUTOTITLE](/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise#policies).
+    {%- endif %}
+  {%- endif %}
 
 * **Audit the source code of the action**
 

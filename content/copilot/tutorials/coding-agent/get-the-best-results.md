@@ -1,9 +1,9 @@
 ---
-title: Best practices for using Copilot to work on tasks
+title: Best practices for using GitHub Copilot to work on tasks
 shortTitle: Get the best results
 allowTitleToDifferFromFilename: true
 intro: 'Learn how to get the best results from {% data variables.copilot.copilot_coding_agent %}.'
-product: '{% data reusables.gated-features.copilot-coding-agent %}<br><a href="https://github.com/features/copilot/plans?ref_cta=Copilot+plans+signup&ref_loc=best+practices+for+using+copilot+to+work+on+tasks&ref_page=docs" target="_blank" class="btn btn-primary mt-3 mr-3 no-underline"><span>Sign up for {% data variables.product.prodname_copilot_short %}</span> {% octicon "link-external" height:16 %}</a>'
+product: '{% data reusables.gated-features.copilot-coding-agent %}<br><a href="https://github.com/features/copilot/plans?ref_product=copilot&ref_type=engagement&ref_style=button" target="_blank" class="btn btn-primary mt-3 mr-3 no-underline"><span>Sign up for {% data variables.product.prodname_copilot_short %}</span> {% octicon "link-external" height:16 %}</a>'
 versions:
   feature: copilot
 topics:
@@ -17,11 +17,12 @@ redirect_from:
   - /copilot/how-tos/agents/copilot-coding-agent/best-practices-for-using-copilot-to-work-on-tasks
   - /copilot/tutorials/coding-agent/best-practices
 contentType: tutorials
+category:
+  - Automate simple user stories
+  - Author and optimize with Copilot
 ---
 
 > [!NOTE]
-> {% data reusables.copilot.coding-agent.preview-note-text %}
->
 > For an introduction to {% data variables.copilot.copilot_coding_agent %}, see [AUTOTITLE](/copilot/concepts/about-copilot-coding-agent).
 
 ## Making sure your issues are well-scoped
@@ -60,9 +61,11 @@ Issues that you may choose to work on yourself, rather than assigning to {% data
 
 ## Using comments to iterate on a pull request
 
-Working with {% data variables.product.prodname_copilot_short %} on a pull request is just like working with a human developer: it's common for the pull request to need further work before it can be merged. The process for getting the pull request to a mergeable state is exactly the same when the pull request is created by {% data variables.product.prodname_copilot_short %} as when it's created by a human. If you want, you can work on the feature branch yourself and push changes to the pull request. However, you can also just add comments to the pull request—explaining what you think is incorrect, or could be improved—and leave {% data variables.product.prodname_copilot_short %} to make the required changes.
+Working with {% data variables.product.prodname_copilot_short %} on a pull request is just like working with a human developer: it's common for the pull request to need further work before it can be merged. The process for getting the pull request to a mergeable state is exactly the same when the pull request is created by {% data variables.product.prodname_copilot_short %} as when it's created by a human.
 
-{% data variables.product.prodname_copilot_short %} will read all comments as soon as they are submitted by users with write access, and will decide whether they require action. It will then start to make any required changes, and will update the pull request when it's done. Because {% data variables.product.prodname_copilot_short %} starts looking at comments as soon as they are submitted, if you are likely to make multiple comments on a pull request it's best to batch them by clicking **Start a review**, rather than clicking **Add single comment**. You can then submit all of your comments at once, triggering {% data variables.product.prodname_copilot_short %} to work on your entire review, rather than working on individual comments separately.
+You can also mention `@copilot` in comments on the pull request—explaining what you think is incorrect, or could be improved—and leave {% data variables.product.prodname_copilot_short %} to make the required changes. Alternatively, you can work on the feature branch yourself and push changes to the pull request.
+
+After a user with write access mentions `@copilot` in a comment, {% data variables.product.prodname_copilot_short %} will start to make any required changes, and will update the pull request when it's done. Because {% data variables.product.prodname_copilot_short %} starts looking at comments as soon as they are submitted, if you are likely to make multiple comments on a pull request it's best to batch them by clicking **Start a review**, rather than clicking **Add single comment**. You can then submit all of your comments at once, triggering {% data variables.product.prodname_copilot_short %} to work on your entire review, rather than working on individual comments separately.
 
 > [!NOTE]
 > {% data reusables.copilot.coding-agent.write-access-required %}
@@ -75,9 +78,23 @@ By adding custom instructions to your repository, you can guide {% data variable
 
 If {% data variables.product.prodname_copilot_short %} is able to build, test and validate its changes in its own development environment, it is more likely to produce good pull requests which can be merged quickly.
 
-You can add instructions in a single `.github/copilot-instructions.md` file in the repository, or create one or more `.github/instructions/**/*.instructions.md` files applying to different files or directories in your repository. For more information, see [AUTOTITLE](/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot?tool=webui).
+{% data variables.copilot.copilot_coding_agent %} supports a number of different types of custom instructions files:
 
-Here is an example of an effective `copilot-instructions.md` file:
+* `/.github/copilot-instructions.md`
+* `/.github/instructions/**/*.instructions.md`
+* `**/AGENTS.md`
+* `/CLAUDE.md`
+* `/GEMINI.md`
+
+For more information, see [AUTOTITLE](/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot?tool=webui).
+
+### Repository-wide instructions
+
+To add instructions that apply to all tasks assigned to {% data variables.product.prodname_copilot_short %} in your repository, create a `.github/copilot-instructions.md` file in the root of your repository. This file should contain information about your project, such as how to build and test it, and any coding standards or conventions you want {% data variables.product.prodname_copilot_short %} to follow. Note that the instructions will also apply to {% data variables.copilot.copilot_chat_short %} and {% data variables.copilot.copilot_code-review_short %}.
+
+The first time you ask {% data variables.product.prodname_copilot_short %} to create a pull request in a given repository, {% data variables.product.prodname_copilot_short %} will leave a comment with a link to automatically generate custom instructions. You can also ask {% data variables.product.prodname_copilot_short %} to generate custom instructions for you at any time using our recommended prompt. See [AUTOTITLE](/copilot/how-tos/configure-custom-instructions/add-repository-instructions?tool=webui#asking-copilot-coding-agent-to-generate-a-copilot-instructionsmd-file).
+
+You can also choose to write your own custom instructions at any time. Here is an example of an effective `copilot-instructions.md` file:
 
 ```markdown
 This is a Go based repository with a Ruby client for certain API endpoints. It is primarily responsible for ingesting metered usage for GitHub and recording that usage. Please follow these guidelines when contributing:
@@ -112,11 +129,55 @@ This is a Go based repository with a Ruby client for certain API endpoints. It i
 5. Document public APIs and complex logic. Suggest changes to the `docs/` folder when appropriate
 ```
 
-If you choose not to include any {% data variables.product.prodname_copilot_short %} instructions files in your repository, {% data variables.product.prodname_copilot_short %} will fall back to pre-existing custom instructions including `CLAUDE.md`, `AGENTS.md` and `GEMINI.md`.
+### Path-specific instructions
+
+To add instructions that apply to specific types of files {% data variables.product.prodname_copilot_short %} will work on, like unit tests or React components, create one or more `.github/instructions/**/*.instructions.md` files in your repository.
+In these files, include information about the file types, such as how to build and test them, and any coding standards or conventions you want {% data variables.product.prodname_copilot_short %} to follow.
+
+Using the glob pattern in the front matter of the instructions file, you can specify the file types to which they should apply. For example, to create instructions for Playwright tests you could create an instructions file called `.github/instructions/playwright-tests.instructions.md` with the following content:
+
+```markdown
+---
+applyTo: "**/tests/*.spec.ts"
+---
+
+## Playwright test requirements
+
+When writing Playwright tests, please follow these guidelines to ensure consistency and maintainability:
+
+1. **Use stable locators** - Prefer `getByRole()`, `getByText()`, and `getByTestId()` over CSS selectors or XPath
+1. **Write isolated tests** - Each test should be independent and not rely on other tests' state
+1. **Follow naming conventions** - Use descriptive test names and `*.spec.ts` file naming
+1. **Implement proper assertions** - Use Playwright's `expect()` with specific matchers like `toHaveText()`, `toBeVisible()`
+1. **Leverage auto-wait** - Avoid manual `setTimeout()` and rely on Playwright's built-in waiting mechanisms
+1. **Configure cross-browser testing** - Test across Chromium, Firefox, and WebKit browsers
+1. **Use Page Object Model** - Organize selectors and actions into reusable page classes for maintainability
+1. **Handle dynamic content** - Properly wait for elements to load and handle loading states
+1. **Set up proper test data** - Use beforeEach/afterEach hooks for test setup and cleanup
+1. **Configure CI/CD integration** - Set up headless mode, screenshots on failure, and parallel execution
+```
+
+## Organization-wide custom instructions
+
+{% data variables.copilot.copilot_coding_agent %} leverages your organization's custom instructions as part of its work. {% data variables.copilot.copilot_coding_agent %} first prioritizes repository-wide custom instructions. For more information on how to configure organization custom instructions, see [AUTOTITLE](/copilot/how-tos/configure-custom-instructions/add-organization-instructions).
 
 ## Using the Model Context Protocol (MCP)
 
 You can extend the capabilities of {% data variables.copilot.copilot_coding_agent %} by using MCP. This allows {% data variables.copilot.copilot_coding_agent %} to use tools provided by local and remote MCP servers. The {% data variables.product.github %} MCP server and [Playwright MCP server](https://github.com/microsoft/playwright-mcp) are enabled by default. For more information, see [AUTOTITLE](/copilot/using-github-copilot/coding-agent/extending-copilot-coding-agent-with-mcp).
+
+## Creating {% data variables.copilot.custom_agents_short %}
+
+While custom instructions help guide {% data variables.product.prodname_copilot_short %}'s general behavior across your repository, {% data variables.copilot.custom_agents_short %} create entirely specialized agents with focused expertise and tailored tool configurations. These agents are designed for specific, recurring workflows where domain expertise and consistent behavior are crucial. {% data variables.copilot.custom_agents_caps_short %} are defined as Markdown files called {% data variables.copilot.agent_profiles %}.
+
+Here are some examples of {% data variables.copilot.custom_agents_short %} you could create:
+
+{% data reusables.copilot.custom-agents-examples-list %}
+
+By default, {% data variables.copilot.custom_agents_short %} inherit any MCP server tools that have been configured in the repository, but you can also configure {% data variables.copilot.custom_agents_short %} to only have access to specific tools.
+
+You can use {% data variables.copilot.custom_agents_short %} anywhere you use {% data variables.copilot.copilot_coding_agent %}, including when assigning an issue or prompting with a task.
+
+For more information on creating and configuring {% data variables.copilot.custom_agents_short %}, see [AUTOTITLE](/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents).
 
 ## Pre-installing dependencies in {% data variables.product.prodname_copilot %}'s environment
 

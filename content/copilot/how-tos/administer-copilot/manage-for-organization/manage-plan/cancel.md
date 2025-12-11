@@ -1,5 +1,5 @@
 ---
-title: Canceling Copilot for your organization
+title: Canceling GitHub Copilot for your organization
 shortTitle: Cancel
 intro: 'Removing all assigned {% data variables.product.prodname_copilot %} seats in your organization will cancel your organization''s {% data variables.product.prodname_copilot_short %} plan.'
 permissions: Organization owners
@@ -17,6 +17,8 @@ redirect_from:
   - /copilot/how-tos/administer/organizations/manage-plan/cancel
   - /copilot/how-tos/administer/manage-for-organization/manage-plan/cancel
 contentType: how-tos
+category: 
+  - Manage Copilot for a team
 ---
 
 {% ifversion ghec %}

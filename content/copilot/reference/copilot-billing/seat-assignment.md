@@ -1,11 +1,13 @@
 ---
-title: Copilot seat assignment
+title: GitHub Copilot seat assignment
 shortTitle: Seat assignment
 intro: 'Learn how seat assignment for {% data variables.product.prodname_copilot %} works in organizations and enterprises, including billing, user eligibility, and assignment management.'
 versions:
   feature: copilot
 topics:
   - Copilot
+category:
+  - Learn about Copilot
 contentType: reference
 ---
 

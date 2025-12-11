@@ -26,17 +26,23 @@ Your billing experience depends on whether your products are metered, volume-bas
 
 ## Billing cycles for metered products
 
-Metered products have a fixed **billing period** that runs from the first day of each month to the last day of the month.
+Metered products, and all payments made using an Azure subscription ID, have a fixed **billing period** that starts at 00:00:00 UTC on the first day of each month and ends at 23:59:59 UTC on the last day of the month.
 
-At the end of each month, your metered usage is calculated and scheduled to be billed on your **bill cycle day**.
+At the end of each month, your metered usage is calculated and scheduled to be billed on your **billing date**. Accounts using an Azure subscription ID can access their specific billing date in the Azure commerce portal. For users with other payment methods:
 
-{% ifversion fpt %}For personal accounts and organizations, your bill cycle day is typically the day you started a paid plan (not necessarily when the account was created).{% elsif ghec %}Your bill cycle day is typically determined by when you converted from a trial to a paid enterprise account.{% endif %} For example, if you {% ifversion fpt %}started a paid plan{% elsif ghec %}converted from a trial{% endif %} on the 15th of a month, you will be billed on the 15th of each subsequent month.
+* **Personal and organization accounts:** This is typically the day you started a paid plan (not necessarily when the account was created).
+* **Enterprise accounts:** This is typically determined by when you converted from a trial to a paid enterprise account.
 
-> [!NOTE] If you are paying via an Azure subscription ID, your **billing period** will run from the first day of each month to the last day of the month. To access your specific **bill cycle day**, please visit the Azure commerce portal.
+For example, if you started a paid plan or converted from a trial on the 15th of a month, you will be billed on the 15th of each subsequent month.
+
+> [!NOTE]
+> From **December 1, 2025**, all self-serve, metered {% data variables.product.prodname_ghe_cloud %} accounts that pay by credit card will migrate to a **billing date** of 1st of the month. See [Billing date standardized to the first of the month for self-serve credit card metered Enterprise customers](https://github.blog/changelog/2025-11-17-billing-date-standardized-to-the-first-of-the-month-for-self-serve-credit-card-metered-enterprise-customers-now-generally-available/) in the changelog.
 
 ## Billing cycles for volume-based products
 
 Volume-based licenses may follow a different billing cycle. These products are often billed based on the anniversary date of your subscription rather than by calendar month.
+
+You can switch between annual and monthly billing from the "Licensing" page under "Billing and licensing", see [AUTOTITLE](/copilot/how-tos/manage-your-account/view-and-change-your-copilot-plan#changing-your-billing-cycle).
 
 ## How mid-cycle changes affect your billing
 

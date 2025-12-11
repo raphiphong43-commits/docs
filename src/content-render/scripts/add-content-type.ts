@@ -1,14 +1,14 @@
-// This script auto-populates the `contentType` frontmatter property based on
-// the directory location of the content file.
-// Run with:
-// npm run-script -- add-content-type --help
+/**
+ * @purpose Writer tool
+ * @description Auto-populate the `contentType` frontmatter property based on the directory location of the content file
+ */
 
 import fs from 'fs'
 import path from 'path'
 import { program } from 'commander'
 import frontmatter from '@/frame/lib/read-frontmatter'
 import walkFiles from '@/workflows/walk-files'
-import { contentTypesEnum } from '#src/frame/lib/frontmatter.js'
+import { contentTypesEnum } from '@/frame/lib/frontmatter'
 import type { MarkdownFrontmatter } from '@/types'
 
 const RESPONSIBLE_USE_STRING = 'responsible-use'
@@ -88,7 +88,7 @@ async function main() {
   console.log(`\nUpdated ${updatedCount} files out of ${processedCount}`)
 }
 
-function processFile(filePath: string, options: ScriptOptions) {
+function processFile(filePath: string, scriptOptions: ScriptOptions) {
   const fileContent = fs.readFileSync(filePath, 'utf8')
   const relativePath = path.relative(contentDir, filePath)
 
@@ -100,17 +100,11 @@ function processFile(filePath: string, options: ScriptOptions) {
   if (!data) return { processed: false, updated: false }
 
   // Remove the legacy type property if option is passed
-  const removeLegacyType = Boolean(options.removeType && data.type)
+  const removeLegacyType = Boolean(scriptOptions.removeType && data.type)
 
-  // Skip if contentType already exists and we're not removing legacy type
-  if (data.contentType && !removeLegacyType) {
-    console.log(`contentType already set on ${relativePath}`)
-    return { processed: true, updated: false }
-  }
+  const newContentType = determineContentType(relativePath, data.type || '')
 
-  const newContentType = data.contentType || determineContentType(relativePath, data.type || '')
-
-  if (options.dryRun) {
+  if (scriptOptions.dryRun) {
     console.log(`\n${relativePath}`)
     if (!data.contentType) {
       console.log(`   ✅  Would set contentType: "${newContentType}"`)
@@ -121,9 +115,24 @@ function processFile(filePath: string, options: ScriptOptions) {
     return { processed: true, updated: false }
   }
 
-  // Set the contentType property if it doesn't exist
-  if (!data.contentType) {
+  // Check if we're actually changing an existing contentType
+  const isChangingContentType = data.contentType && data.contentType !== newContentType
+  const isAddingContentType = !data.contentType
+
+  if (isChangingContentType) {
+    console.log(
+      `Changing contentType from '${data.contentType}' to '${newContentType}' on ${relativePath}`,
+    )
+  } else if (isAddingContentType) {
+    console.log(`Adding contentType '${newContentType}' on ${relativePath}`)
+  }
+
+  // Only update if there's actually a change needed
+  if (isChangingContentType || isAddingContentType) {
     data.contentType = newContentType
+  } else {
+    console.log(`contentType is already set to '${data.contentType}' on ${relativePath}`)
+    return { processed: true, updated: false }
   }
 
   let legacyTypeValue
@@ -135,7 +144,7 @@ function processFile(filePath: string, options: ScriptOptions) {
   // Write the file back
   fs.writeFileSync(filePath, frontmatter.stringify(content, data, { lineWidth: -1 } as any))
 
-  if (options.verbose) {
+  if (scriptOptions.verbose) {
     console.log(`\n${relativePath}`)
     console.log(`   ✅  Set contentType: "${newContentType}"`)
     if (removeLegacyType) {
@@ -183,4 +192,8 @@ function determineContentType(relativePath: string, legacyType: string): string 
   return OTHER_TYPE
 }
 
-main().catch(console.error)
+try {
+  await main()
+} catch (error) {
+  console.error(error)
+}

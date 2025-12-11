@@ -9,7 +9,7 @@ featuredLinks:
   popular:
     - /pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
     - /authentication
-    - /copilot/how-tos/get-code-suggestions/get-code-suggestions
+    - /copilot/how-tos/get-code-suggestions/get-ide-code-suggestions
     - /get-started/git-basics/managing-remote-repositories
     - /pages
 redirect_from:
@@ -53,6 +53,7 @@ children:
   - get-started
   - enterprise-onboarding
   - account-and-profile
+  - subscriptions-and-notifications
   - authentication
   - repositories
   - admin
@@ -65,6 +66,7 @@ children:
   - actions
   - copilot
   - codespaces
+  - integrations
   - migrations
   - packages
   - search-github
@@ -92,6 +94,7 @@ childGroups:
       - get-started
       - migrations
       - account-and-profile
+      - subscriptions-and-notifications
       - authentication
       - billing
       - site-policy
@@ -102,30 +105,31 @@ childGroups:
       - repositories
       - pull-requests
       - discussions
+      - integrations
   - name: GitHub Copilot
     octicon: CopilotIcon
     children:
       - copilot
       - copilot/get-started/plans
-      - copilot/how-tos/get-code-suggestions/get-code-suggestions
-      - copilot/tutorials/copilot-chat-cookbook
+      - copilot/how-tos/get-code-suggestions/get-ide-code-suggestions
       - copilot/how-tos/use-copilot-agents/coding-agent
-      - copilot/how-tos/configure-custom-instructions
+      - copilot/tutorials
+      - copilot/tutorials/copilot-chat-cookbook
+      - copilot/tutorials/customization-library
   - name: CI/CD and DevOps
     octicon: GearIcon
     children:
       - actions
       - packages
       - pages
-  - name: Security
+  - name: Security and quality
     octicon: ShieldLockIcon
     children:
-      - code-security
       - code-security/secret-scanning
       - code-security/supply-chain-security
       - code-security/dependabot
       - code-security/code-scanning
-      - code-security/security-advisories
+      - code-security/code-quality
   - name: Client apps
     octicon: DeviceMobileIcon
     children:
@@ -138,14 +142,13 @@ childGroups:
       - issues
       - issues/planning-and-tracking-with-projects
       - search-github
-  - name: Enterprise and Teams
+  - name: Enterprise and teams
     octicon: OrganizationIcon
     children:
       - organizations
       - code-security/securing-your-organization
       - enterprise-onboarding
       - admin
-      - gh-wa
   - name: Developers
     octicon: CodeSquareIcon
     children:
@@ -153,7 +156,6 @@ childGroups:
       - rest
       - graphql
       - webhooks
-      - copilot/how-tos/use-copilot-extensions
       - github-models
   - name: Community
     octicon: GlobeIcon
@@ -193,4 +195,3 @@ externalProducts:
     href: 'https://wellarchitected.github.com/'
     external: true
 ---
-

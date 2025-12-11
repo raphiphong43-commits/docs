@@ -1,5 +1,5 @@
 ---
-title: 'Writing pull request descriptions with {% data variables.copilot.copilot_autocomplete_pr %}'
+title: Writing pull request descriptions with GitHub Copilot text completion
 shortTitle: Write PR descriptions
 allowTitleToDifferFromFilename: true
 intro: 'Write pull request descriptions more quickly and accurately with {% data variables.copilot.copilot_autocomplete_pr %}.'
@@ -13,6 +13,8 @@ redirect_from:
   - /copilot/how-tos/completions/using-copilot-text-completion
   - /copilot/how-tos/completions/write-pr-descriptions
 contentType: how-tos
+category: 
+  - Author and optimize with Copilot
 ---
 
 {% data reusables.copilot.text-completion-preview %}
